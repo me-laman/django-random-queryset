@@ -25,15 +25,8 @@ class RandomQuerySet(models.query.QuerySet):
                 aggregates['count'],
             ))
 
-        try:
-            selected_ids = strategies.min_max_count(
-                amount,
-                aggregates['min_id'],
-                aggregates['max_id'],
-                aggregates['count'],
-            )
-        except strategies.SmallPopulationSize:
-            selected_ids = self.values_list('id', flat=True)
+        # list of all id's
+        ids = self.values_list('id', flat=True)
+        selected_ids = strategies.random_count(ids, amount=amount)
 
-        assert len(selected_ids) > amount
-        return self.filter(id__in=selected_ids).order_by('?')[:amount]
+        return self.filter(id__in=selected_ids)
