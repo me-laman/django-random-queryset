@@ -11,7 +11,7 @@ setup(
     platforms=['any'],
     description="The extension gives you ability to pull random records using Django's ORM.",
     long_description=open('README.rst').read(),
-    url='http://github.com/rremizov/django-random-queryset',
+    url='https://github.com/me-laman/django-random-queryset',
 
     packages=[
         'django_random_queryset',
